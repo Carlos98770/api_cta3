@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Medico(models.Model):
     STATUS_CHOICES = [
@@ -30,6 +31,7 @@ class Ubs(models.Model):
     telefone = models.CharField(max_length=100, unique=True)
     endereco = models.ForeignKey(Endereco, on_delete=models.SET_NULL, null=True)
     medicos = models.ManyToManyField(Medico)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome
