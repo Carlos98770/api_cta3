@@ -31,9 +31,13 @@ class RegistrarPresenca(APIView):
         except Medico.DoesNotExist:
             return Response({'erro': 'Médico com esse CPF não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
 
-        medico.status = 'Presente'
+        if medico.status == 'Ausente':
+            medico.status = 'Presente'
+        else:
+            medico.status = 'Ausente'
+        
         medico.save()
 
-        return Response({'mensagem': f'Médico {medico.nome} marcado como Presente.'}, status=status.HTTP_200_OK)
+        return Response({'mensagem': f'Médico {medico.nome} marcado como {medico.status}.'}, status=status.HTTP_200_OK)
 
         
