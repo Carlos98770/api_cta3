@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Medico, Ubs, Vinculo
-from .serializers import MedicoSerializer, UbsSerializer
+from .serializers import MedicoComStatusSerializer, UbsSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,7 +9,7 @@ from rest_framework import status
 class MedicoList(APIView):
     def get(self, request):
         medicos = Medico.objects.all()
-        serializer = MedicoSerializer(medicos, many=True)
+        serializer = MedicoComStatusSerializer(medicos, many=True)
         return Response(serializer.data)
 
 class UbsList(APIView):
