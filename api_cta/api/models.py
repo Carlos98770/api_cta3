@@ -2,19 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Medico(models.Model):
-    STATUS_CHOICES = [
-        ('Presente', 'Presente'),
-        ('Ausente', 'Ausente'),
-    ]
 
     nome = models.CharField(max_length=100, unique=True)
     especialidade = models.CharField(max_length=80)
     crm = models.CharField(max_length=30, unique=True)
-    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default='Ausente')
     cpf = models.CharField(max_length=11, unique=True)
 
     def __str__(self):
         return self.nome
+    
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=100)
@@ -35,3 +31,9 @@ class Ubs(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class Vinculo(models.Model):
+
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
+    ubs = models.ForeignKey(Ubs,on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, choices=[('Presente', 'Presente'), ('Ausente', 'Ausente')], default='Ausente')

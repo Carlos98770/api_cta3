@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ubs, Medico, Endereco
+from .models import Ubs, Medico, Endereco,Vinculo
 
 class UBSAdmin(admin.ModelAdmin):
     readonly_fields = ['usuario']
@@ -33,3 +33,4 @@ class UBSAdmin(admin.ModelAdmin):
 admin.site.register(Ubs, UBSAdmin)
 admin.site.register(Medico)
 admin.site.register(Endereco)
+admin.site.register(Vinculo)
